@@ -4,11 +4,17 @@ on:
     types: [opened]
 
 jobs:
-  automate:
+  job1:
     runs-on: ubuntu-latest
+    env:
+      PROJECT: "kanban"
+      COLUMN: "To do"
+    outputs:
+      out1: ${{ steps.step1.outputs.test }}
     steps:
-      - uses: alex-page/github-project-automation-plus@v0.8.1
+      - id: step1
+        uses: alex-page/github-project-automation-plus@v0.8.1
         with:
-          project: kanban
-          column: To do
+          project: $PROJECT
+          column: $COLUMN
           repo-token: ${{ secrets.GHPROJECT_TOKEN }}
